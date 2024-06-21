@@ -5,14 +5,16 @@ const int ledPin = 13; // Pin connected to the LED
 bool ledState = LOW; // Variable to store the current LED state
 bool isTemperatureHigh = false; // Variable to track temperature condition
 
-void setup() {
+void setup() 
+{
   pinMode(ledPin, OUTPUT); // Initialize the LED pin as an output
   
   Timer1.initialize(1000); // Set up a timer with an interval of 1000 microseconds (1ms)
   Timer1.attachInterrupt(timerISR); // Attach the timer ISR (Interrupt Service Routine)
 }
 
-void loop() {
+void loop() 
+{
   int sensorValue = analogRead(A0);
   // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
  float voltage = sensorValue * (5.0 / 1023.0);
@@ -21,21 +23,25 @@ void loop() {
  // float temperature = readTemperature(); // Read temperature from sensor (you need to replace this with actual temperature reading code)
 
   // Check temperature condition
-  if (temperature >= 30) {
+  if (temperature >= 30)
+  {
     isTemperatureHigh = true;
-  } else {
+  } else 
+  {
     isTemperatureHigh = false;
   }
 }
 
-void timerISR() {
+void timerISR()
+{
   if (isTemperatureHigh)
    {
-    toggleLED(500); // Toggle LED with 500ms delay if temperature is greater than or equal to 30°C
-  } else
+     toggleLED(500); // Toggle LED with 500ms delay if temperature is greater than or equal to 30°C
+   }
+  else
    {
-    toggleLED(250); // Toggle LED with 250ms delay if temperature is less than 30°C
-  }
+      toggleLED(250); // Toggle LED with 250ms delay if temperature is less than 30°C
+   }
 }
 
 void toggleLED(int delayTime)
